@@ -1,5 +1,6 @@
-sudo kubectl apply -f https://raw.githubusercontent.com/RIckyBan/gaming-hoge-generator/master/manifests/ingress-install.yaml
-sudo kubectl apply -f https://raw.githubusercontent.com/RIckyBan/gaming-hoge-generator/master/manifests/api.yaml
-sudo kubectl apply -f https://raw.githubusercontent.com/RIckyBan/gaming-hoge-generator/master/manifests/web.yaml
-sudo kubectl apply -f https://raw.githubusercontent.com/RIckyBan/gaming-hoge-generator/master/manifests/kcs-service-account.yaml
-sudo kubectl apply -f https://raw.githubusercontent.com/RIckyBan/gaming-hoge-generator/master/manifests/kcs.yaml
+MANIFESTS_JSON=$(curl https://api.github.com/repos/Matts966/gaming-hoge-generator/contents/manifests)
+NUM=$(echo $json | jq length)
+
+for i in $( seq 0 $(($NUM - 1)) ); do
+  sudo kubectl apply -f $(echo $json | jq .[$i].download_url)
+done
