@@ -20,7 +20,7 @@ spec:
         image: ghcr.io/matts966/kubernetes-cloudflare-syncer/gcloud:latest
         args:
         - --dns-name=project-gamingify.pw
-        - --project=gaming-hoge-generator
+        - --project=lab-cluster-284217
         - --filter="status = RUNNING"
         - --cloudflare-proxy=true
         env:
