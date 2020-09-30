@@ -1,6 +1,6 @@
 resource "google_compute_instance" "gaming-hoge-controller" {
   name         = "gaming-hoge-controller"
-  machine_type = "n1-standard-4"
+  machine_type = "e2-small"
   zone         = "us-west1-a"
   description  = "gaming-hoge-controller"
   tags         = ["gaming-hoge", "public-controller"]
@@ -26,7 +26,7 @@ resource "google_compute_instance" "gaming-hoge-controller" {
   metadata_startup_script = <<-EOT
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y docker.io
+    sudo apt install -y docker.io wireguard
     sudo groupadd docker 
     sudo usermod -aG docker $USER
     sudo systemctl enable docker
@@ -42,7 +42,7 @@ resource "google_compute_instance" "gaming-hoge-controller" {
 
 resource "google_compute_instance" "gaming-hoge-worker-0" {
   name         = "gaming-hoge-worker-0"
-  machine_type = "n1-standard-2"
+  machine_type = "e2-small"
   zone         = "us-west1-b"
   description  = "gaming-hoge-controller"
   tags         = ["gaming-hoge", "public-worker"]
@@ -68,7 +68,7 @@ resource "google_compute_instance" "gaming-hoge-worker-0" {
   metadata_startup_script = <<-EOT
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y docker.io
+    sudo apt install -y docker.io wireguard
     sudo groupadd docker 
     sudo usermod -aG docker $USER
     sudo systemctl enable docker
@@ -84,7 +84,7 @@ resource "google_compute_instance" "gaming-hoge-worker-0" {
 
 resource "google_compute_instance" "gaming-hoge-worker-1" {
   name         = "gaming-hoge-worker-1"
-  machine_type = "n1-standard-2"
+  machine_type = "e2-small"
   zone         = "us-west1-c"
   description  = "gaming-hoge-controller"
   tags         = ["gaming-hoge", "public-worker"]
@@ -110,7 +110,7 @@ resource "google_compute_instance" "gaming-hoge-worker-1" {
   metadata_startup_script = <<-EOT
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y docker.io
+    sudo apt install -y docker.io wireguard
     sudo groupadd docker 
     sudo usermod -aG docker $USER
     sudo systemctl enable docker
