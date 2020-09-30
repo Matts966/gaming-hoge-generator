@@ -33,7 +33,7 @@ You can deploy this application on kubernetes with the following commands.
 
 ### command
 ```bash
-sudo curl -sf https://raw.githubusercontent.com/RIckyBan/gaming-hoge-generator/master/scripts/k8s-deploy.sh | sh -s
+sudo curl -sf https://raw.githubusercontent.com/Matts966/gaming-hoge-generator/master/scripts/k8s-deploy.sh | sh -s
 ```
 
 ## Manual Setup
