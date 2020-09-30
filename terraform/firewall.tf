@@ -5,12 +5,12 @@ resource "google_compute_firewall" "gaming-hoge-allow-internal" {
   allow {
     protocol = "tcp"
   }
-
-    allow {
+  
+  allow {
     protocol = "udp"
   }
-
-    allow {
+  
+  allow {
     protocol = "icmp"
   }
 
@@ -27,7 +27,7 @@ resource "google_compute_firewall" "gaming-hoge-allow-external" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22", "6443"]
+    ports    = ["22", "80", "6443"]
   }
 
     allow {
