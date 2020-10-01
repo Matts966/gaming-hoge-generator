@@ -26,7 +26,7 @@ resource "google_compute_instance" "gaming-hoge-controller" {
   metadata_startup_script = <<-EOT
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y docker.io wireguard
+    sudo apt install -y docker.io wireguard jq golang-go
     sudo groupadd docker 
     sudo usermod -aG docker $USER
     sudo systemctl enable docker
@@ -37,6 +37,23 @@ resource "google_compute_instance" "gaming-hoge-controller" {
     sudo apt-get update
     sudo apt-get install -y kubelet kubeadm kubectl
     sudo apt-mark hold kubelet kubeadm kubectl
+
+    sudo kubeadm init --pod-network-cidr 192.168.0.0/16
+    mkdir -p $HOME/.kube
+    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    kubectl taint nodes $(hostname) node-role.kubernetes.io/master:NoSchedule-
+
+    curl https://docs.projectcalico.org/manifests/calico.yaml -O
+    kubectl apply -f calico.yaml
+
+    echo KUBECONFIG=$HOME/.kube/config >> $HOME/.bashrc
+
+    mkdir $HOME/go
+    echo GOPATH=$HOME/go >> $HOME/.bashrc
+    echo PATH=\$PATH:$HOME/go/go/bin >> $HOME/.bashrc
+    source $HOME/.bashrc
+    go get -u github.com/squat/kilo/cmd/kgctl
   EOT
 }
 
