@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: api
   name: api
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       io.kompose.service: api
@@ -29,7 +29,9 @@ spec:
         name: api
         ports:
         - containerPort: 5000
-        resources: {}
+        resources:
+          limits:
+            nvidia.com/gpu: 1 # requesting 1 GPU
       restartPolicy: Always
       serviceAccountName: ""
       volumes: null
