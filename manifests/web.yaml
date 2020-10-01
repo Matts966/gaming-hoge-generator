@@ -28,7 +28,7 @@ metadata:
     io.kompose.service: web
   name: web
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       io.kompose.service: web

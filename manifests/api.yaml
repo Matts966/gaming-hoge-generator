@@ -29,7 +29,9 @@ spec:
         name: api
         ports:
         - containerPort: 5000
-        resources: {}
+        resources:
+          limits:
+            nvidia.com/gpu: 1 # requesting 1 GPU
       restartPolicy: Always
       serviceAccountName: ""
       volumes: null
